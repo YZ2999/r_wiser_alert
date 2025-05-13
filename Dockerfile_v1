@@ -30,7 +30,7 @@ RUN apt-get update
 
  
 # RUN R -e "install.packages(c('lubridate','RCurl','DBI','RPostgres','stringr','teamr','rmarkdown',  'sf', 'scales', 'leaflet', 'leaflet.extras','reactable', 'dplyr', 'tidyr', 'lubridate', 'htmltools', 'htmlwidgets', 'webshot2', 'blastula', 'ggplot2' ,'V8'), repos='https://cloud.r-project.org/')"
-RUN R -e "install.packages('flexdashboard') , repos='https://cloud.r-project.org/')"
+RUN R -e "install.packages(c('flexdashboard') , repos='https://cloud.r-project.org/')"
 
 
 # Create a non-root user
