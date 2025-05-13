@@ -31,7 +31,8 @@ RUN useradd -m ruser && \
     chown -R ruser:ruser /home/ruser
 
  
-RUN R -e "install.packages(c('lubridate','RCurl','DBI','RPostgres','stringr','teamr','rmarkdown', 'flexdashboard', 'sf', 'scales', 'leaflet', 'leaflet.extras','reactable', 'dplyr', 'tidyr', 'lubridate', 'htmltools', 'htmlwidgets', 'webshot2', 'blastula', 'ggplot2' ,'V8'), repos='https://cloud.r-project.org/')"
+RUN R -e "install.packages(c('lubridate','RCurl','DBI','RPostgres','stringr','teamr','rmarkdown',  'sf', 'scales', 'leaflet', 'leaflet.extras','reactable', 'dplyr', 'tidyr', 'lubridate', 'htmltools', 'htmlwidgets', 'webshot2', 'blastula', 'ggplot2' ,'V8'), repos='https://cloud.r-project.org/')"
+RUN R -e "install.packages(c('shiny','flexdashboard') , repos='https://cloud.r-project.org/')"
 
 USER ruser
 WORKDIR /tmp
