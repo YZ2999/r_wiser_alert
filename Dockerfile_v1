@@ -1,0 +1,41 @@
+FROM r-base:4.5.0
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    wget \
+    gnupg \
+    libxss1 \
+    libxtst6 \
+    libnss3 \
+    libasound2 \
+    xvfb \
+    cmake \
+    libnlopt-dev \
+    libcurl4-gnutls-dev \
+    libssl-dev \
+    libpq-dev \
+    libgdal-dev \
+    libudunits2-dev && \
+    # Add Chrome repository
+    wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    # Clean up
+    apt-get autoremove -yqq --purge && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+
+# Create a non-root user
+RUN useradd -m ruser && \
+    mkdir -p /home/ruser/Downloads && \
+    chown -R ruser:ruser /home/ruser
+
+ 
+RUN R -e "install.packages(c('lubridate','RCurl','DBI','RPostgres','stringr','teamr','rmarkdown', 'flexdashboard', 'sf', 'scales', 'leaflet', 'leaflet.extras','reactable', 'dplyr', 'tidyr', 'lubridate', 'htmltools', 
+  'htmlwidgets', 'webshot2', 'blastula', 'ggplot2' ,'V8'), repos='https://cloud.r-project.org/')"
+
+USER ruser
+WORKDIR /tmp
+
+ENTRYPOINT [ '/bin/bash']
