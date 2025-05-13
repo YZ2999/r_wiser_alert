@@ -39,7 +39,7 @@ RUN useradd -m ruser && \
     chown -R ruser:ruser /home/ruser
 
 
-USER ruser
+#USER ruser
 WORKDIR /tmp
 
 ENTRYPOINT [ '/bin/bash']
