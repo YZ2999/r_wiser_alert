@@ -6,7 +6,6 @@ RUN apt-get update && \
     libxss1 \
     libxtst6 \
     libnss3 \
-    libasound2 \
     xvfb \
     cmake \
     libnlopt-dev \
