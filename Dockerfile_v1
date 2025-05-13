@@ -26,15 +26,20 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 RUN apt-get update
 
+
+
+ 
+RUN R -e "install.packages(c('lubridate','RCurl','DBI','RPostgres','stringr','teamr','rmarkdown', 'flexdashboard', 'sf', 'scales', 'leaflet', 'leaflet.extras','reactable', 'dplyr', 'tidyr', 'lubridate', 'htmltools', 'htmlwidgets', 'webshot2', 'blastula', 'ggplot2' ,'V8'), repos='https://cloud.r-project.org/')"
+
+
 # Create a non-root user
 RUN useradd -m ruser && \
     mkdir -p /home/ruser/Downloads && \
     chown -R ruser:ruser /home/ruser
 
- 
-RUN R -e "install.packages(c('lubridate','RCurl','DBI','RPostgres','stringr','teamr','rmarkdown', 'flexdashboard', 'sf', 'scales', 'leaflet', 'leaflet.extras','reactable', 'dplyr', 'tidyr', 'lubridate', 'htmltools', 'htmlwidgets', 'webshot2', 'blastula', 'ggplot2' ,'V8'), repos='https://cloud.r-project.org/')"
 
-USER ruser
+    
+#USER ruser
 WORKDIR /tmp
 
 ENTRYPOINT [ '/bin/bash']
